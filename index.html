@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find NYC community support and official resources for food, benefits, housing, education, and more.">
+  <meta name="theme-color" content="#174f48">
+  <title>CommunityConnect AI | NYC resources, made easier</title>
+  <style>
+    :root {
+      --ink: #18312e; --muted: #61716d; --green: #174f48; --green2: #23685e;
+      --mint: #e8f4ef; --cream: #fbfaf6; --line: #dce6e0; --white: #fff;
+      --orange: #f1b66b; --shadow: 0 12px 32px rgba(24,49,46,.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; }
+    a { color: var(--green2); }
+    button, input, select { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin: 0 auto; }
+    .topline { background: var(--green); color: #f4fbf7; font-size: .83rem; padding: 9px 0; }
+    .topline .wrap { display: flex; gap: 10px; justify-content: space-between; flex-wrap: wrap; }
+    header { border-bottom: 1px solid var(--line); background: rgba(251,250,246,.96); }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--ink); font-weight: 800; letter-spacing: -.03em; font-size: 1.1rem; }
+    .brandmark { width: 39px; height: 39px; border-radius: 13px; display: grid; place-items: center; background: var(--green); color: white; font-size: 1.25rem; }
+    nav { display: flex; gap: 24px; align-items: center; }
+    nav a { text-decoration: none; color: var(--ink); font-weight: 650; font-size: .93rem; }
+    nav a:hover, a:hover { text-decoration: underline; }
+    .button { border: 0; display: inline-flex; align-items: center; justify-content: center; border-radius: 12px; background: var(--green); color: white; padding: 12px 17px; font-weight: 750; text-decoration: none; cursor: pointer; transition: transform .15s, background .15s; }
+    .button:hover { background: var(--green2); text-decoration: none; transform: translateY(-1px); }
+    .button.secondary { background: white; color: var(--green); border: 1px solid var(--line); }
+    .hero { padding: 68px 0 52px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 45px; align-items: center; }
+    .eyebrow { display: inline-flex; gap: 8px; align-items: center; color: var(--green2); font-weight: 800; font-size: .83rem; letter-spacing: .07em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.6rem, 6vw, 4.8rem); line-height: 1.02; letter-spacing: -.065em; margin: 17px 0 20px; max-width: 740px; }
+    h1 span { color: var(--green2); }
+    .hero p { font-size: 1.12rem; color: var(--muted); max-width: 610px; margin: 0 0 26px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { position: relative; min-height: 320px; display: grid; place-items: center; }
+    .art-circle { width: min(340px, 100%); aspect-ratio: 1; border-radius: 50%; background: #e2efe7; position: relative; display: grid; place-items: center; }
+    .art-circle:before, .art-circle:after { content: ""; position: absolute; border-radius: 50%; border: 1px solid #bad4c8; }
+    .art-circle:before { inset: 22px; } .art-circle:after { inset: 47px; }
+    .art-center { z-index: 1; width: 122px; height: 122px; border-radius: 35px; background: var(--green); color: white; display: grid; place-items: center; font-size: 3.1rem; box-shadow: var(--shadow); transform: rotate(-7deg); }
+    .float-card { position: absolute; z-index: 2; background: white; border: 1px solid var(--line); border-radius: 16px; padding: 13px 16px; box-shadow: var(--shadow); font-size: .92rem; font-weight: 750; }
+    .float-card small { display: block; font-weight: 500; color: var(--muted); }
+    .fc1 { top: 27px; left: -4px; } .fc2 { right: -6px; top: 102px; } .fc3 { bottom: 24px; left: 18px; }
+    .section { padding: 56px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 25px; }
+    .section-head h2 { font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.1; letter-spacing: -.04em; margin: 8px 0; }
+    .section-head p { margin: 0; color: var(--muted); max-width: 590px; }
+    .search-panel { background: white; border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); padding: 22px; }
+    .search-row { display: grid; grid-template-columns: 1fr 190px 190px auto; gap: 10px; }
+    .field { width: 100%; min-width: 0; border: 1px solid #ccd9d2; border-radius: 12px; background: #fff; color: var(--ink); padding: 13px 14px; outline: none; }
+    .field:focus { border-color: var(--green2); box-shadow: 0 0 0 3px #d8ebe2; }
+    .search-help { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: .85rem; margin-top: 12px; flex-wrap: wrap; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+    .chip { border: 1px solid var(--line); border-radius: 99px; background: var(--cream); color: var(--ink); padding: 7px 12px; cursor: pointer; font-weight: 650; font-size: .88rem; }
+    .chip:hover, .chip.active { background: var(--mint); border-color: #a9cdbd; }
+    .results-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 25px 0 15px; }
+    .results-bar h3 { margin: 0; font-size: 1.08rem; }
+    #resultCount { color: var(--muted); font-size: .9rem; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .resource-card { background: white; border: 1px solid var(--line); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; min-height: 260px; }
+    .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .category { color: var(--green2); background: var(--mint); border-radius: 99px; padding: 5px 9px; font-size: .77rem; font-weight: 800; }
+    .status { color: #56665e; font-size: .75rem; font-weight: 700; }
+    .resource-card h4 { font-size: 1.2rem; letter-spacing: -.025em; margin: 15px 0 7px; line-height: 1.25; }
+    .resource-card p { color: var(--muted); font-size: .93rem; margin: 0 0 15px; }
+    .meta { font-size: .84rem; margin-bottom: 15px; }
+    .meta strong { color: var(--ink); }
+    .card-actions { margin-top: auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .card-actions a { font-size: .9rem; font-weight: 750; text-decoration: none; }
+    .card-actions a:hover { text-decoration: underline; }
+    .empty { display: none; padding: 30px; background: white; border: 1px dashed #bdcec4; border-radius: 18px; text-align: center; color: var(--muted); }
+    .info-band { background: #eaf3ee; border-block: 1px solid #d7e7de; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .feature { padding: 10px 0; }
+    .feature-icon { width: 43px; height: 43px; display: grid; place-items: center; border-radius: 14px; background: white; font-size: 1.3rem; }
+    .feature h3 { margin: 13px 0 6px; font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .callout { background: var(--green); color: white; padding: 28px; border-radius: 22px; display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    .callout h2 { margin: 0 0 6px; letter-spacing: -.03em; } .callout p { color: #dcece4; margin: 0; }
+    .callout .button { background: white; color: var(--green); flex-shrink: 0; }
+    footer { padding: 30px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .86rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+    .notice { margin-top: 18px; background: #fff7e8; border: 1px solid #f0d8ad; border-radius: 12px; padding: 13px 15px; color: #6e5228; font-size: .88rem; }
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr .7fr; gap: 20px; }
+      .search-row { grid-template-columns: 1fr 1fr; }
+      .search-row .field:first-child { grid-column: 1 / -1; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-art { min-height: 280px; } .fc2 { right: -3px; }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 28px, 1120px); }
+      .nav { min-height: 66px; } nav { gap: 13px; } nav a { font-size: .85rem; } nav .nav-about { display: none; }
+      .brand { font-size: 1rem; } .brandmark { width: 34px; height: 34px; }
+      .hero { padding: 43px 0 30px; } .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 230px; margin-top: 4px; } .art-circle { width: 225px; } .art-center { width: 86px; height: 86px; border-radius: 25px; font-size: 2.3rem; }
+      .fc1 { top: 4px; left: 0; } .fc2 { right: 0; top: 72px; } .fc3 { bottom: 4px; left: 0; }
+      .float-card { font-size: .8rem; padding: 9px 11px; }
+      .section { padding: 39px 0; } .section-head { align-items: start; flex-direction: column; }
+      .search-panel { padding: 14px; } .search-row { grid-template-columns: 1fr; } .search-row .field:first-child { grid-column: auto; }
+      .cards, .three { grid-template-columns: 1fr; }
+      .resource-card { min-height: 0; } .callout { align-items: start; flex-direction: column; padding: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="topline"><div class="wrap"><span>Built for New Yorkers, with community at the center.</span><span>Free to use · No account needed</span></div></div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#" aria-label="CommunityConnect AI home"><span class="brandmark" aria-hidden="true">✳</span><span>CommunityConnect <span style="color:var(--green2)">AI</span></span></a>
+      <nav aria-label="Main navigation">
+        <a href="#directory">Find resources</a>
+        <a class="nav-about" href="#how-it-works">How it works</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span aria-hidden="true">✦</span> NYC community resource guide</div>
+          <h1>Finding support should feel <span>simpler.</span></h1>
+          <p>Explore trusted starting points for food, benefits, housing, education, and other community support across New York City.</p>
+          <div class="hero-actions">
+            <a class="button" href="#directory">Find a resource <span aria-hidden="true">&nbsp;→</span></a>
+            <a class="button secondary" href="#how-it-works">How it works</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-circle"><div class="art-center">✳</div></div>
+          <div class="float-card fc1">Food support <small>Find local options</small></div>
+          <div class="float-card fc2">Benefits <small>Explore eligibility</small></div>
+          <div class="float-card fc3">Community first <small>Clear next steps</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="directory" style="padding-top:25px">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Resource directory</div><h2>What kind of help are you looking for?</h2><p>Search these trusted starting points. Use filters to narrow the list to what you need.</p></div>
+        </div>
+        <div class="search-panel">
+          <div class="search-row">
+            <label class="sr-only" for="searchInput" style="position:absolute;left:-9999px">Search resources</label>
+            <input class="field" id="searchInput" type="search" placeholder="Try “food pantry”, “rent help”, or “benefits”…" autocomplete="off">
+            <label style="position:absolute;left:-9999px" for="categoryFilter">Filter by category</label>
+            <select class="field" id="categoryFilter">
+              <option value="">All categories</option>
+              <option>Food</option><option>Benefits</option><option>Housing</option><option>Education</option><option>General support</option>
+            </select>
+            <label style="position:absolute;left:-9999px" for="boroughFilter">Filter by borough</label>
+            <select class="field" id="boroughFilter">
+              <option value="">All boroughs</option>
+              <option>Bronx</option><option>Brooklyn</option><option>Manhattan</option><option>Queens</option><option>Staten Island</option><option>Citywide</option>
+            </select>
+            <button class="button" id="clearButton" type="button">Clear</button>
+          </div>
+          <div class="search-help"><span>Tip: try a need, program name, or borough.</span><span id="resultCount" aria-live="polite">Loading resources…</span></div>
+          <div class="chips" aria-label="Quick searches">
+            <button class="chip" type="button" data-query="food">🥕 Food</button>
+            <button class="chip" type="button" data-query="benefits">🧾 Benefits</button>
+            <button class="chip" type="button" data-query="housing">🏠 Housing</button>
+            <button class="chip" type="button" data-query="education">📚 Education</button>
+            <button class="chip" type="button" data-query="311">☎️ City services</button>
+          </div>
+        </div>
+
+        <div class="results-bar"><h3>Resources to get you started</h3><span id="resultCountAlt" style="color:var(--muted);font-size:.9rem"></span></div>
+        <div class="cards" id="resourceCards"></div>
+        <div class="empty" id="emptyState"><strong>No matches yet.</strong><p>Try another word or clear one of the filters.</p><button class="button secondary" id="emptyClear" type="button">Reset search</button></div>
+        <div class="notice"><strong>Before you go:</strong> These are starting points and official directories, not a guarantee that a particular service has openings today. Confirm hours, eligibility, location, and availability with the provider before traveling.</div>
+      </div>
+    </section>
+
+    <section class="section info-band" id="how-it-works">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Our approach</div><h2>Useful information, without extra hurdles.</h2><p>The first version focuses on making reliable resources easier to find. AI features can be added after the directory is tested.</p></div></div>
+        <div class="three">
+          <div class="feature"><div class="feature-icon" aria-hidden="true">🔎</div><h3>Search in plain language</h3><p>Use everyday words instead of needing to know a program's official name.</p></div>
+          <div class="feature"><div class="feature-icon" aria-hidden="true">🔗</div><h3>Go to the original source</h3><p>Each listing links to an official government or service-provider website when available.</p></div>
+          <div class="feature"><div class="feature-icon" aria-hidden="true">🛡️</div><h3>Respect privacy</h3><p>No login or personal details are required to search this directory.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="callout">
+          <div><h2>Know a resource we should include?</h2><p>Help us improve the directory by checking listings and sharing official resource pages.</p></div>
+          <a class="button" href="https://www.nyc.gov/311/" target="_blank" rel="noopener noreferrer">Visit NYC 311 ↗</a>
+        </div>
+        <p style="color:var(--muted);font-size:.9rem;margin-top:16px">CommunityConnect AI is an independent project in development and is not affiliated with New York City government. It is not yet a registered nonprofit. This directory is informational and does not determine eligibility for services.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> CommunityConnect AI · A project in development</span>
+      <div class="footer-links"><a href="https://access.nyc.gov/" target="_blank" rel="noopener noreferrer">ACCESS NYC</a><a href="https://www.nyc.gov/311/" target="_blank" rel="noopener noreferrer">NYC 311</a><a href="#directory">Back to directory ↑</a></div>
+    </div>
+  </footer>
+
+  <script>
+    // Starter records are trusted resource-finding tools, not individual locations.
+    // Check official pages again before expanding this directory or advertising availability.
+    const resources = [
+      {
+        id: "access-nyc",
+        name: "ACCESS NYC — Benefits Finder",
+        category: "Benefits",
+        borough: "Citywide",
+        description: "Check potential eligibility for city, state, and federal benefit programs, and learn how to apply.",
+        keywords: "benefits financial assistance SNAP food cash childcare education health insurance rent utility disability",
+        audience: "Eligibility depends on the program. The administering agency makes the final decision.",
+        url: "https://access.nyc.gov/",
+        source: "NYC benefits information",
+        checked: "2026-10-22"
+      },
+      {
+        id: "food-connection",
+        name: "Community Food Connection",
+        category: "Food",
+        borough: "Citywide",
+        description: "NYC's food assistance program connects people with food pantries and community kitchens.",
+        keywords: "food pantry groceries meals hot meal community kitchen emergency food hunger",
+        audience: "Contact a provider or use the official Food Help NYC Map to confirm details.",
+        url: "https://www.nyc.gov/site/hra/help/food-assistance.page",
+        source: "NYC Human Resources Administration",
+        checked: "2026-10-22"
+      },
+      {
+        id: "food-help-map",
+        name: "Food Help NYC Map",
+        category: "Food",
+        borough: "Citywide",
+        description: "Use the city's official food help map to look for food pantries and community kitchens near you.",
+        keywords: "food pantry map groceries meals Bronx Brooklyn Manhattan Queens Staten Island nearby",
+        audience: "Check the map or call 311 to confirm location and current service information.",
+        url: "https://www.nyc.gov/site/hra/help/food-assistance.page",
+        source: "NYC Human Resources Administration",
+        checked: "2026-10-22"
+      },
+      {
+        id: "nyc-311",
+        name: "NYC 311 — City Services",
+        category: "General support",
+        borough: "Citywide",
+        description: "Find information about non-emergency city services, including housing, food assistance, education, and more.",
+        keywords: "city services phone help housing shelter education immigration transportation food sites libraries clinics",
+        audience: "For non-emergency city services. Call 311 in NYC; use 911 for emergencies.",
+        url: "https://www.nyc.gov/311/",
+        source: "NYC government",
+        checked: "2026-10-22"
+      },
+      {
+        id: "nyc-benefits-data",
+        name: "NYC Benefits & Programs Directory",
+        category: "Benefits",
+        borough: "Citywide",
+        description: "Browse an official dataset of benefits and programs maintained through NYC Open Data.",
+        keywords: "database public data benefits programs assistance eligibility government official",
+        audience: "Program details vary; open the listing and confirm requirements with the agency.",
+        url: "https://data.cityofnewyork.us/Social-Services/NYC-Benefits-Platform-Benefits-and-Programs-Dataset/kvhd-5fmu",
+        source: "NYC Open Data",
+        checked: "2026-10-22"
+      },
+      {
+        id: "yourpeer",
+        name: "YourPeer — Community Services Directory",
+        category: "General support",
+        borough: "Citywide",
+        description: "Explore a community-validated directory of free support services across NYC, including food, clothing, housing, health, legal help, and employment.",
+        keywords: "free services shelter clothing personal care health mental health legal employment community directory",
+        audience: "Check the provider's current listing for eligibility, location, and availability.",
+        url: "https://yourpeer.nyc/",
+        source: "YourPeer",
+        checked: "2026-10-22"
+      },
+      {
+        id: "mutual-aid-nyc",
+        name: "Mutual Aid NYC Resource Directory",
+        category: "General support",
+        borough: "Citywide",
+        description: "Search a community resource directory covering areas such as education, food, housing, jobs, legal help, and social services.",
+        keywords: "mutual aid volunteer groups education food housing internet technology jobs legal medical support",
+        audience: "Confirm details with each organization before relying on a listing.",
+        url: "https://services.wegov.nyc/",
+        source: "Mutual Aid NYC",
+        checked: "2026-10-22"
+      },
+      {
+        id: "education-benefits",
+        name: "ACCESS NYC — Education & Family Programs",
+        category: "Education",
+        borough: "Citywide",
+        description: "Start with ACCESS NYC to explore family and child-related assistance programs, including child care support.",
+        keywords: "education childcare child care family school children learning",
+        audience: "Program eligibility and application steps vary.",
+        url: "https://access.nyc.gov/",
+        source: "ACCESS NYC",
+        checked: "2026-10-22"
+      },
+      {
+        id: "housing-benefits",
+        name: "ACCESS NYC — Housing & Expenses",
+        category: "Housing",
+        borough: "Citywide",
+        description: "Explore benefits and programs that may help with housing costs and keeping your housing stable.",
+        keywords: "housing rent eviction expenses utility assistance shelter affordable housing",
+        audience: "Eligibility varies by program; use the official program page for current requirements.",
+        url: "https://access.nyc.gov/",
+        source: "ACCESS NYC",
+        checked: "2026-10-22"
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const boroughFilter = document.getElementById("boroughFilter");
+    const cards = document.getElementById("resourceCards");
+    const emptyState = document.getElementById("emptyState");
+    const resultCount = document.getElementById("resultCount");
+    const resultCountAlt = document.getElementById("resultCountAlt");
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      })[char]);
+    }
+
+    function resourceCard(resource) {
+      return `
+        <article class="resource-card">
+          <div class="card-top">
+            <span class="category">${escapeHTML(resource.category)}</span>
+            <span class="status">Official / directory</span>
+          </div>
+          <h4>${escapeHTML(resource.name)}</h4>
+          <p>${escapeHTML(resource.description)}</p>
+          <div class="meta"><strong>Coverage:</strong> ${escapeHTML(resource.borough)}<br>
+            <strong>Good to know:</strong> ${escapeHTML(resource.audience)}</div>
+          <div class="meta" style="color:var(--muted);font-size:.78rem">Source: ${escapeHTML(resource.source)} · Checked ${escapeHTML(resource.checked)}</div>
+          <div class="card-actions"><a href="${escapeHTML(resource.url)}" target="_blank" rel="noopener noreferrer">Open official resource ↗</a></div>
+        </article>`;
+    }
+
+    function render() {
+      const query = searchInput.value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const borough = boroughFilter.value;
+      const filtered = resources.filter(item => {
+        const searchable = [item.name, item.description, item.category, item.borough, item.keywords, item.audience, item.source].join(" ").toLowerCase();
+        const queryMatches = !query || query.split(/\s+/).every(word => searchable.includes(word));
+        const categoryMatches = !category || item.category === category;
+        const boroughMatches = !borough || item.borough === borough || item.borough === "Citywide";
+        return queryMatches && categoryMatches && boroughMatches;
+      });
+      cards.innerHTML = filtered.map(resourceCard).join("");
+      emptyState.style.display = filtered.length ? "none" : "block";
+      resultCount.textContent = `${filtered.length} ${filtered.length === 1 ? "resource" : "resources"} found`;
+      resultCountAlt.textContent = `${filtered.length} shown`;
+    }
+
+    searchInput.addEventListener("input", render);
+    categoryFilter.addEventListener("change", render);
+    boroughFilter.addEventListener("change", render);
+
+    function clearFilters() {
+      searchInput.value = "";
+      categoryFilter.value = "";
+      boroughFilter.value = "";
+      document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
+      render();
+    }
+    document.getElementById("clearButton").addEventListener("click", clearFilters);
+    document.getElementById("emptyClear").addEventListener("click", clearFilters);
+    document.querySelectorAll(".chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        const query = chip.dataset.query;
+        searchInput.value = query;
+        document.querySelectorAll(".chip").forEach(item => item.classList.toggle("active", item === chip));
+        render();
+        document.getElementById("directory").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+    render();
+  </script>
+</body>
+</html>
